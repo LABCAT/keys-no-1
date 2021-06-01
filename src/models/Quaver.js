@@ -1,4 +1,3 @@
-import * as THREE from 'three'
 import React, { useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
 import { useGLTF } from '@react-three/drei'
@@ -6,7 +5,7 @@ import { useGLTF } from '@react-three/drei'
 export default function Quaver(props) {
     const group = useRef()
     const { colour, xPos } = props;
-    const { nodes, materials } = useGLTF('/Quaver.gltf')
+    const { nodes } = useGLTF('/Quaver.gltf')
     useFrame(() => {
         group.current.position.y = group.current.position.y += 0.05
     })
