@@ -1,4 +1,4 @@
-import Values from 'values.js'
+import Values from "values.js";
 /*
  * http://www.colourmusic.info/intro.htm
  *
@@ -10,8 +10,8 @@ import Values from 'values.js'
  * A (blue):                #0000FF, (0, 0, 255)
  * B (indigo):              #4B0082, (75, 0, 130)
  * C (violet):              #EE82EE, (238,130,238)
- * 
- * Values for sharp notes calculated using lerp color with an amount of 50% 
+ *
+ * Values for sharp notes calculated using lerp color with an amount of 50%
  * D# (red-orange):         #ff5300, (255, 83, 0)
  * F# (yellow-green):       #80c000, (128, 192, 0)
  * G# (green-blue):         #004080, (0, 64, 128)
@@ -20,45 +20,44 @@ import Values from 'values.js'
  */
 
 const colourMap = {
-    50: '#FF0000',
-    51: '#ff5300',
-    52: '#FFA500',
-    53: '#FFFF00',
-    54: '#80c000',
-    55: '#008000',
-    56: '#004080',
-    57: '#0000FF',
-    58: '#2700c1',
-    59: '#4B0082',
-    60: '#f74177',
-    61: '#EE82EE',
-}
+  50: "#FF0000",
+  51: "#ff5300",
+  52: "#FFA500",
+  53: "#FFFF00",
+  54: "#80c000",
+  55: "#008000",
+  56: "#004080",
+  57: "#0000FF",
+  58: "#2700c1",
+  59: "#4B0082",
+  60: "#f74177",
+  61: "#EE82EE",
+};
 
 //50 is the midi value for D3
 function NewtonsColourMapper(midiValue = 50) {
-  let hexColour = '#FFFFFF';
+  let hexColour = "#FFFFFF";
 
   //find a shade
-  if(midiValue < 50){
-    while(midiValue < 61){
-        midiValue = midiValue + 12;
-    }   
+  if (midiValue < 50) {
+    while (midiValue < 50) {
+      midiValue = midiValue + 12;
+    }
     const baseColour = colourMap[midiValue];
     const color = new Values(baseColour);
-    const shadeAmount = Math.ceil((50 - midiValue) /12) * 20;
-    hexColour = color.shade(shadeAmount);
+    const shadeAmount = Math.ceil((50 - midiValue) / 12) * 20;
+    hexColour = "#" + color.shade(shadeAmount).hex;
   }
   //find a tint
-  else if(midiValue > 61){
-    while(midiValue > 50){
-        midiValue = midiValue - 12;
-    }   
+  else if (midiValue > 61) {
+    while (midiValue > 61) {
+      midiValue = midiValue - 12;
+    }
     const baseColour = colourMap[midiValue];
     const color = new Values(baseColour);
-    const tintAmount = Math.ceil((midiValue - 50) /12) * 20;
-    hexColour = color.tint(tintAmount);
-  }
-  else {
+    const tintAmount = Math.ceil((midiValue - 50) / 12) * 20;
+    hexColour = "#" + color.tint(tintAmount).hex;
+  } else {
     hexColour = colourMap[midiValue];
   }
 
