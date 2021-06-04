@@ -35,7 +35,7 @@ const colourMap = {
 };
 
 //50 is the midi value for D3
-function NewtonsColourMapper(midiValue = 50) {
+export default function NewtonsColourMapper(midiValue = 50) {
   let hexColour = "#FFFFFF";
 
   //find a shade
@@ -64,4 +64,3 @@ function NewtonsColourMapper(midiValue = 50) {
   return hexColour;
 }
 
-export default NewtonsColourMapper;

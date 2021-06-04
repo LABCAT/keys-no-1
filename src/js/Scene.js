@@ -1,9 +1,8 @@
 import React, { Suspense, useContext } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
-//https://sketchfab.com/3d-models/grand-piano-a007e6ebd5a64ff7b1aa7ef645b1df31
 import Piano from "../models/Piano.js";
-// /https://sketchfab.com/3d-models/eighth-note-quaver-d0ac32d6475f46469df63df93b1c4e23
+import GlassPiano from "../models/GlassPiano.js";
 import Quaver from "../models/Quaver.js";
 import Loader from "./helpers/Loader.js";
 
@@ -16,20 +15,20 @@ import { Context } from "./context/Context.js";
 export default function Scene() {
   const { notes } = useContext(Context);
   console.log(notes);
+  const camera = { fov: 75, near: 0.1, far: 1000, position: [0,1,2] }
   return (
-    <Canvas>
+    <Canvas camera={camera}>
       <Suspense fallback={<Loader />}>
         <ambientLight intensity={0.5} />
         <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
         <pointLight position={[-10, -10, -10]} />
-        <Piano />
+        <GlassPiano />
         <>
-          {notes.map((colour, index) => (
-            <Quaver key={index} xPos={index} colour={colour} />
+          {notes.map((note, index) => (
+            <Quaver key={index} xPos={note.xPos} colour={note.colour} />
           ))}
         </>
         <OrbitControls />
-        <gridHelper args={[100, 10]} />
       </Suspense>
     </Canvas>
   );

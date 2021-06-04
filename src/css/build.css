@@ -1,6 +1,6 @@
 :root {
-  --top-grad-color: #16092e;
-  --bottom-grad-color: #7E87DE;
+  --top-grad-color: black;
+  --bottom-grad-color: white;
 }
 
 body {
@@ -15,8 +15,9 @@ body {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    background: -webkit-linear-gradient(var(--top-grad-color), var(--bottom-grad-color));
-    background: linear-gradient(var(--top-grad-color), var(--bottom-grad-color));
+    background: -webkit-linear-gradient(black, var(--top-grad-color), black 40%, var(--bottom-grad-color));
+    background: linear-gradient(black, var(--top-grad-color), black 40%, var(--bottom-grad-color));
+    transition: background 0.8823s ease;
 }
 
 #audio-controller {
@@ -27,3 +28,49 @@ body {
   left: 0;
   z-index: 9999;
 }
+
+#audio-controller.loaded {
+  bottom: auto;
+  left: auto;
+  width: 120px!important;
+  height: 120px!important;
+}
+
+#play-icon {
+  position: fixed;
+  top: calc(50% - 60px);
+  left: calc(50% - 60px);
+  z-index: 1;
+  width: 120px;
+  height: 120px;
+  fill: white;
+  opacity: 1;
+  transition: all 0.2205s ease;
+}
+
+#play-icon.loaded {
+  top: 0;
+  right: 0;
+  left: auto;
+}
+
+#play-icon.fade-out {
+  opacity: 0;
+}
+
+#pause-icon {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  width: 120px;
+  height: 120px;
+  fill: white;
+  opacity: 0;
+  transition: all 0.2205s ease;
+}
+
+#pause-icon.fade-in {
+  opacity: 1;
+}
+

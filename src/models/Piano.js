@@ -20,4 +20,5 @@ export default function Piano(props) {
   );
 }
 
+//https://sketchfab.com/3d-models/grand-piano-a007e6ebd5a64ff7b1aa7ef645b1df31
 useGLTF.preload("/Piano.gltf");

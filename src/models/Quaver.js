@@ -5,18 +5,19 @@ import { useGLTF } from '@react-three/drei'
 export default function Quaver(props) {
     const group = useRef()
     const { colour, xPos } = props;
+    console.log(xPos);
     const { nodes } = useGLTF('/Quaver.gltf')
     useFrame(() => {
-        group.current.position.y = group.current.position.y += 0.05
+        group.current.position.y = group.current.position.y += 0.01
     })
     return (
         <group ref={group} {...props} dispose={null}>
             <mesh
                 castShadow
                 receiveShadow
-                scale={1}
+                scale={0.05}
                 geometry={nodes.mesh_0.geometry}
-                position={[xPos, 10, -50]}
+                position={[xPos, 0, 0]}
                 rotation={[0, 5.25, 0]}
             >
                 <meshStandardMaterial
@@ -30,4 +31,5 @@ export default function Quaver(props) {
     )
 }
 
+//https://sketchfab.com/3d-models/eighth-note-quaver-d0ac32d6475f46469df63df93b1c4e23
 useGLTF.preload('/Quaver.gltf')
