@@ -2,8 +2,7 @@ import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 
 export default function GlassPiano(props) {
-  const group = useRef();
-  const { nodes, materials } = useGLTF("/GlassPiano.gltf");
+  const { nodes } = useGLTF("/GlassPiano.gltf");
 
   return (
      <primitive object={nodes['OSG_Scene']} position={[-1.5,0,0]} />

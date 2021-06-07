@@ -1,21 +1,15 @@
 import React, { Suspense, useContext } from "react";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
-import Piano from "../models/Piano.js";
-import GlassPiano from "../models/GlassPiano.js";
-import Quaver from "../models/Quaver.js";
+import { OrbitControls, Stars } from "@react-three/drei";
+import FireFly from './components/FireFly'
+import GlassPiano from "./components/GlassPiano.js";
+import Quaver from "./components/Quaver.js";
 import Loader from "./helpers/Loader.js";
-
 import { Context } from "./context/Context.js";
 
-//tutorials and examples
-//https://docs.pmnd.rs/react-three-fiber/getting-started/loading-models
-//https://codesandbox.io/s/rrppl0y8l4?file=/src/App.js:1078-1101
-//https://codesandbox.io/s/r3f-suspense-zu2wo?file=/src/index.js:809-829
 export default function Scene() {
-  const { notes } = useContext(Context);
-  console.log(notes);
-  const camera = { fov: 75, near: 0.1, far: 1000, position: [0,1,2] }
+  const { notes, fireflies } = useContext(Context);
+  const camera = { fov: 75, near: 0.1, far: 1000, position: [0,1,3] }
   return (
     <Canvas camera={camera}>
       <Suspense fallback={<Loader />}>
@@ -28,6 +22,12 @@ export default function Scene() {
             <Quaver key={index} xPos={note.xPos} colour={note.colour} />
           ))}
         </>
+        <>
+          {fireflies.map((firefly, index) => (
+            <FireFly key={index} size={firefly.size} colour={firefly.colour} />
+          ))}
+        </>
+        <Stars/>
         <OrbitControls />
       </Suspense>
     </Canvas>

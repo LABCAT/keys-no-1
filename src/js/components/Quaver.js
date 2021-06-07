@@ -5,10 +5,9 @@ import { useGLTF } from '@react-three/drei'
 export default function Quaver(props) {
     const group = useRef()
     const { colour, xPos } = props;
-    console.log(xPos);
     const { nodes } = useGLTF('/Quaver.gltf')
     useFrame(() => {
-        group.current.position.y = group.current.position.y += 0.01
+        group.current.position.y = group.current.position.y += 0.005
     })
     return (
         <group ref={group} {...props} dispose={null}>

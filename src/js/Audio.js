@@ -12,7 +12,7 @@ import PlayIcon from "./icons/PlayIcon.js";
 import { Context } from "./context/Context.js";
 
 const Audio = () => {
-  const { updateNotes } = useContext(Context);
+  const { updateNotes, updateFireFlies } = useContext(Context);
   const sketchRef = useRef();
 
   const Sketch = (p) => {
@@ -99,7 +99,7 @@ const Audio = () => {
         p.cueSet2Completed.push(currentCue);
         const colour = NewtonsColourMapper(vars.midi);
         const root = document.documentElement;
-        root.style.setProperty("--top-grad-color", colour);
+        root.style.setProperty("--bottom-grad-color", colour);
       }
     };
 
@@ -108,7 +108,12 @@ const Audio = () => {
       if (!p.cueSet3Completed.includes(currentCue)) {
         p.cueSet3Completed.push(currentCue);
         const colour = NewtonsColourMapper(vars.midi);
-        const root = document.documentElement;
+        const mappedSize = p.map(currentCue, 1, 48, 0.25, 1.5);
+        const size = mappedSize <= 1.5 ? mappedSize : 1.5;
+        updateFireFlies({
+          colour: colour,
+          size: size
+        });
       }
     };
 
