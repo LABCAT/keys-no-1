@@ -1,5 +1,4 @@
 :root {
-  --top-grad-color: black;
   --bottom-grad-color: #03e5b7;
 }
 
@@ -17,8 +16,8 @@ body {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    background: -webkit-linear-gradient(var(--top-grad-color), black,  #037ade 40%, var(--bottom-grad-color));
-    background: linear-gradient(var(--top-grad-color), black, #037ade 40%, var(--bottom-grad-color));
+    background: -webkit-linear-gradient(black,  #037ade 40%, var(--bottom-grad-color));
+    background: linear-gradient( black, #037ade 40%, var(--bottom-grad-color));
     transition: background 0.8823s ease;
 }
 
