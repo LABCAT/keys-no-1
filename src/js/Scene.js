@@ -1,15 +1,17 @@
 import React, { Suspense, useContext } from "react";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, Stars } from "@react-three/drei";
+import { Stars } from "@react-three/drei";
+import CameraControls from './components/CameraControls'
 import FireFly from './components/FireFly'
-import GlassPiano from "./components/GlassPiano.js";
-import Quaver from "./components/Quaver.js";
-import Loader from "./helpers/Loader.js";
-import { Context } from "./context/Context.js";
+import GlassPiano from "./components/GlassPiano";
+import Quaver from "./components/Quaver";
+import Loader from "./helpers/Loader";
+import { Context } from "./context/Context";
+
 
 export default function Scene() {
-  const { notes, fireflies } = useContext(Context);
-  const camera = { fov: 75, near: 0.1, far: 1000, position: [0,1,3] }
+  const { notes, fireflies, isAudioPlaying } = useContext(Context);
+  const camera = { fov: 75, near: 0.1, far: 1000, position: [0,1,4.5] }
   return (
     <Canvas camera={camera}>
       <Suspense fallback={<Loader />}>
@@ -19,7 +21,7 @@ export default function Scene() {
         <GlassPiano />
         <>
           {notes.map((note, index) => (
-            <Quaver key={index} xPos={note.xPos} colour={note.colour} />
+            <Quaver key={index} xPos={note.xPos} zPos={note.zPos} colour={note.colour} />
           ))}
         </>
         <>
@@ -28,7 +30,7 @@ export default function Scene() {
           ))}
         </>
         <Stars/>
-        <OrbitControls />
+        <CameraControls isAudioPlaying={isAudioPlaying} />
       </Suspense>
     </Canvas>
   );

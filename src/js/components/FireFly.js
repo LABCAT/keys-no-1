@@ -25,7 +25,7 @@ export default function Fireflies(props) {
       <bufferGeometry>
         <bufferAttribute attachObject={['attributes', 'position']} count={count} array={positionArray} itemSize={3} />
         <bufferAttribute attachObject={['attributes', 'aScale']} count={count} array={scaleArray} itemSize={1} />
-        <bufferAttribute attachObject={['varyings', 'myColour']} count={count} array={vec4Colour} itemSize={4} />
+        <bufferAttribute attachObject={['varyings', 'myColour']} count={count} array={vec4Colour[0]} itemSize={1} />
       </bufferGeometry>
       <fireflyMaterial ref={shader} transparent depthWrite={false} />
     </points>

@@ -4,10 +4,10 @@ import { useGLTF } from '@react-three/drei'
 
 export default function Quaver(props) {
     const group = useRef()
-    const { colour, xPos } = props;
     const { nodes } = useGLTF('/Quaver.gltf')
+    const { colour, xPos, zPos } = props;
     useFrame(() => {
-        group.current.position.y = group.current.position.y += 0.005
+        group.current.position.y = group.current.position.y += 0.01
     })
     return (
         <group ref={group} {...props} dispose={null}>
@@ -16,7 +16,7 @@ export default function Quaver(props) {
                 receiveShadow
                 scale={0.05}
                 geometry={nodes.mesh_0.geometry}
-                position={[xPos, 0, 0]}
+                position={[xPos, 0, zPos]}
                 rotation={[0, 5.25, 0]}
             >
                 <meshStandardMaterial

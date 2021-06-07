@@ -12,7 +12,7 @@ import PlayIcon from "./icons/PlayIcon.js";
 import { Context } from "./context/Context.js";
 
 const Audio = () => {
-  const { updateNotes, updateFireFlies } = useContext(Context);
+  const { updateNotes, updateFireFlies, updateIsAudioPlaying } = useContext(Context);
   const sketchRef = useRef();
 
   const Sketch = (p) => {
@@ -41,6 +41,12 @@ const Audio = () => {
       if(p.song){
         p.addCues();
       }
+      setTimeout(
+        function(){ 
+          document.getElementById("play-icon").classList.add("show");
+        }, 
+        250
+      );
     };
 
     p.cuesAdded = false;
@@ -86,9 +92,11 @@ const Audio = () => {
         p.cueSet1Completed.push(currentCue);
         const colour = NewtonsColourMapper(vars.midi);
         const xPos = p.map(vars.midi, 21, 108, -1.25, 1.25);
+        const zPos = p.random(-0.15, 0.15);
         updateNotes({
           colour: colour,
-          xPos: xPos
+          xPos: xPos,
+          zPos: zPos
         });
       }
     };
@@ -112,7 +120,7 @@ const Audio = () => {
         const size = mappedSize <= 1.5 ? mappedSize : 1.5;
         updateFireFlies({
           colour: colour,
-          size: size
+          size: mappedSize
         });
       }
     };
@@ -120,20 +128,27 @@ const Audio = () => {
     p.mousePressed = () => {
       if (p.song.isPlaying()) {
         p.song.pause();
-        document.getElementById("play-icon").classList.remove("fade-out");
-        document.getElementById("pause-icon").classList.remove("fade-in");
+        updateIsAudioPlaying(false);
       } else {
         if (
           parseInt(p.song.currentTime()) >= parseInt(p.song.buffer.duration)
         ) {
-          p.reset();
         }
-        document.getElementById("audio-controller").classList.add("loaded");
-        document.getElementById("play-icon").classList.add("fade-out");
-        document.getElementById("pause-icon").classList.add("fade-in");
-        document.getElementById("play-icon").classList.add("loaded");
+        else {
+          
+        }
+        updateIsAudioPlaying(true);
         p.addCues();
-        p.song.play();
+        document.getElementById("audio-controller").classList.add("loaded");
+        document.getElementById("play-icon-holder").classList.add("fade-out");
+        document.getElementById("play-icon").classList.add("fade-out");
+        setTimeout(
+          function(){ 
+            p.song.play(); 
+            document.getElementById("play-icon-holder").classList.add("loaded");
+          }, 
+          1100
+        );
       }
     };
   };
@@ -145,8 +160,9 @@ const Audio = () => {
 
   return (
     <div ref={sketchRef}>
-      <PauseIcon/>
-      <PlayIcon/>
+      <div id="play-icon-holder">
+        <PlayIcon/>
+      </div>
     </div>
   );
 };

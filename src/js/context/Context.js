@@ -5,6 +5,7 @@ import Reducer from "./Reducer";
 const initialState = {
     notes: [],
     fireflies: [],
+    isAudioPlaying: false,
 }
 
 export const Context = createContext(initialState);
@@ -20,6 +21,10 @@ export const GlobalContextProvider = ({ children }) => {
         dispatch({ type: "UPDATE_FIREFLIES", payload: newFireFly });
     }
 
+    const updateIsAudioPlaying = (playing) => {
+        dispatch({ type: "UPDATE_AUDIO_STATE", payload: playing });
+    }
+
     return <Context.Provider
         value={
             {
@@ -27,6 +32,8 @@ export const GlobalContextProvider = ({ children }) => {
                 updateNotes,
                 fireflies: state.fireflies,
                 updateFireFlies,
+                isAudioPlaying: state.isAudioPlaying,
+                updateIsAudioPlaying,
             }
         }
     >

@@ -12,6 +12,12 @@ export default function reducer(state, action) {
                 fireflies: [...state.fireflies, action.payload]
             }
         }
+        case "UPDATE_AUDIO_STATE": {
+            return {
+                ...state,
+                isAudioPlaying: action.payload
+            }
+        }
         default:
             throw new Error('Action type does not exist!')
     }
