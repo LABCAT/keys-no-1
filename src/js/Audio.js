@@ -7,7 +7,6 @@ import cueSet1 from "./cueSets/cueSet1.js";
 import cueSet2 from "./cueSets/cueSet2.js";
 import cueSet3 from "./cueSets/cueSet3.js";
 import NewtonsColourMapper from "./functions/NewtonsColourMapper.js";
-import PauseIcon from "./icons/PauseIcon.js";
 import PlayIcon from "./icons/PlayIcon.js";
 import { Context } from "./context/Context.js";
 
@@ -116,11 +115,10 @@ const Audio = () => {
       if (!p.cueSet3Completed.includes(currentCue)) {
         p.cueSet3Completed.push(currentCue);
         const colour = NewtonsColourMapper(vars.midi);
-        const mappedSize = p.map(currentCue, 1, 48, 0.25, 1.5);
-        const size = mappedSize <= 1.5 ? mappedSize : 1.5;
+        const size = p.map(currentCue, 1, 48, 0.25, 1.5);
         updateFireFlies({
           colour: colour,
-          size: mappedSize
+          size: size
         });
       }
     };
