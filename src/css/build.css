@@ -33,8 +33,8 @@ body {
 #audio-controller.loaded {
   bottom: auto;
   left: auto;
-  width: 120px!important;
-  height: 120px!important;
+  width: 0px!important;
+  height: 0px!important;
 }
 
 #play-icon-holder {
